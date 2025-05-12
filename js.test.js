@@ -1,4 +1,5 @@
 const students=[]
+const modify_ = document.getElementById("avg_")
 const tableBody=document.querySelector("#studentsTable tbody")
 document.getElementById("studentForm").addEventListener("submit",function (e){
 e.preventDefault();
@@ -18,6 +19,8 @@ e.preventDefault();
  students.push(student);
  //console.log(students)
 addStudentToTable(student)
+avg_prom()
+
  this.reset()
 
 
@@ -31,4 +34,15 @@ function addStudentToTable(student){
        <td>${student.grade}</td>
        <td>${student.date}</td>`;
      tableBody.appendChild(row);
-       }
+    }
+
+function avg_prom(){
+    let CANT_ST = students.length
+    let total = 0
+    
+    for (elem of students){
+        console.log(elem)
+        total = total + elem.grade
+    }
+    modify_.innerHTML = `Promedio general del curso: ${total/CANT_ST}`
+}
