@@ -1,49 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
+    <h2>Notas Front-End</h2>
+<form id="studentForm">
+    <div>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" required>
+    </div>
+    <div>
+        <label for="lastName">Apellido:</label>
+        <input type="text" id="lastName" required>
+    </div>
+    <div>
+        <label for="grade">Nota:</label>
+        <input type="number" id="grade" step="0.1" min="1" max="7" required>
+    </div>
+    <div>
+        <label for="grade">Fecha:</label>
+        <input type="date" id="date" required>
+    </div>
+    <button type="submit">Guardar Alumno</button>
+</form>
+<table id="studentsTable" border="1" cellpadding="8" cellspacing="0">
+ <thead>
+    <tr>
+     <th>Nombre</th>
+     <th>Apellido</th>
+     <th>Nota</th>
+     <th>Fecha</th>
+    </tr>
+ </thead>
+ <tbody>
+    <!--Datos de las filas de cada alumno-->
+ </tbody>
+</table>
 
-    <h2>Notas Front-end</h2>
-    
-    <form id="student_form">
-
-        <div>
-        <label for="name">Nombre</label>
-        <input placeholder="Nombre" type="text" id="name">
-
-        </div>
-        
-        <div>
-        <label for="lastname">Apellido</label>
-        <input type="text" id="lastname">    
-        </div>
-
-        <div>
-        <label for="score">Nota</label>
-        <input type="number" id="score" step="0.1" min="1" max="7">
-        </div>
-        
-        <div>
-        <button type="submit">Guardar</button>
-        </div>
-
-    </form>
-
-    <table id="table_" border="1" cellpadding="8" cellspacing="0">
-        
-        <thead>
-            <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Score</th>
-            </tr>
-        </thead>
-
-    </table>
-
-    <script src="js.test.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

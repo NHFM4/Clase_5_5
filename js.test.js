@@ -1,35 +1,34 @@
-const students_ = []
-const table_ = document.querySelector("#table_ tbody")
+const students=[]
+const tableBody=document.querySelector("#studentsTable tbody")
+document.getElementById("studentForm").addEventListener("submit",function (e){
+e.preventDefault();
+ 
+ const name=document.getElementById("name").value.trim();
+ const lastName=document.getElementById("lastName").value.trim();
+ const grade=parseFloat(document.getElementById("grade").value);
+ const date=document.getElementById("date").value.trim();
 
-document.getElementById("student_form").addEventListener("submit", function (e){
-    e.preventDefault()
+ if(!name || !lastName || isNaN(grade) || grade<1 || grade>7 || !date){
+    alert("Error al ingresar Datos")
+    return
+ }
 
-    const name_ = document.getElementById("name").value.trim()
-    const lname_ = document.getElementById("lastname").value.trim()
-    const scores_ = parseFloat(document.getElementById("score").value)
+ const student={name,lastName,grade,date};
 
-    if (!scores_ || !name_ || !lname_ || isNaN(scores_) || scores_ < 1 || scores_ > 7){
-        alert("Rellena todos los campos =>> [ERROR]")
-        return
-    }
-
-    const obj_st_ = {name_, lname_, scores_}
-    students_.push(obj_st_)
-
-    addStudenTable(obj_st_)
-    console.log(students_)
-
-})
-
-function addStudenTable(obj_st_){
-
-    const row = document.createElement("tr")
-    row.innerHTML = `
-    <td>${obj_st_.name_}
-    <td>${obj_st_.lname_}
-    <td>${obj_st_.scores_}` 
-    
-    table_.appendChild(row)
+ students.push(student);
+ //console.log(students)
+addStudentToTable(student)
+ this.reset()
 
 
-}
+});
+
+function addStudentToTable(student){
+    const row=document.createElement("tr");
+    row.innerHTML=`
+      <td>${student.name}</td>
+       <td>${student.lastName}</td>
+       <td>${student.grade}</td>
+       <td>${student.date}</td>`;
+     tableBody.appendChild(row);
+       }
