@@ -40,7 +40,8 @@
                 <input type="date" id="date" required
                 oninvalid="this.setCustomValidity('Porfavor rellene el campo Fecha.')" oninput="this.setCustomValidity('')">
             </div>
-            <button type="submit">Guardar Alumno</button>
+            <button type="submit" id="save_">Guardar Alumno</button>
+            <button style="display: none;" onclick="save()" id="mod_bt" >Guardar Alumno Modificado</button>
 
         </form>
         </div>
@@ -51,6 +52,7 @@
             <th>Apellido</th>
             <th>Nota</th>
             <th>Fecha</th>
+            <th>Acciones</th>
             </tr>
         </thead>
         <tbody>

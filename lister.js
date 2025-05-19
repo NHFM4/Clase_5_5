@@ -20,6 +20,11 @@ e.preventDefault();
     // Creamos una var const con los datos ingresados por la persona
     const student = {name, lastName, grade, date};
 
+    console.log(students)
+    if (students.indexOf(student) > -1){
+        console.log("xdxddd", students.indexOf(student))
+    }
+
     // Se los agregamos al array principal
     students.push(student);
 
@@ -41,13 +46,25 @@ function addStudentToTable(student){
     // Se crea la variable almacenando el documento seleccionado
     const row = document.createElement("tr");
     
+    let index_ = students.length;
     // Le agregamos contenido
     row.innerHTML = `
       <td>${student.name}</td>
        <td>${student.lastName}</td>
        <td>${student.grade}</td>
-       <td>${student.date}</td>`;
-    
+       <td>${student.date}</td>
+        <td> <button class="delete-btn" ${student.actions}">Eliminar</td>
+        <td> <button class="mod" ${student.actions}">Modificar</td>
+        `;
+
+        row.querySelector(".delete-btn").addEventListener("click", function(){
+            deleteEstudiante(student, row);
+        });
+        row.querySelector(".mod").addEventListener("click", function(){
+            mod_est(student, row);
+        });
+        
+
     // Se le aplican los cambios y se agregan al html
     tableBody.appendChild(row);
 }
@@ -69,4 +86,25 @@ function avg_prom(){
         total = total + elem.grade;
     }
     modify_.innerHTML = `Promedio de Calificaciones: ${total/CANT_ST}`;
+}
+
+function deleteEstudiante(elem, row){
+
+    students.slice(elem, 1)
+    avg_prom()
+    console.log(students)
+    row.remove()
+
+
+}
+
+function mod_est(student, row){
+    let cant_ = students.indexOf(student)
+
+    document.getElementById("name").value = students[cant_]["name"]
+    document.getElementById("lastName").value = students[cant_]["lastName"]
+    document.getElementById("grade").value = students[cant_]["grade"]
+    document.getElementById("date").value = students[cant_]["date"]
+
+
 }
