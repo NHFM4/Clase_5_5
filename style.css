@@ -57,6 +57,20 @@ button {
 
 }
 
+.bt_sv {
+
+    margin: 15px;
+    background-color: rgb(119, 162, 242);
+    border: 2px;
+    border-radius: 10px;
+    font-size: 10px;
+    width: 90px;
+    height: 35px;
+    max-width: 250px;
+    margin-right: 131px;
+
+}
+
 thead {
     background-color: rgba(0, 0, 0, 0.051);
 }

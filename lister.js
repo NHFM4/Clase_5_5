@@ -49,13 +49,13 @@ function addStudentToTable(student){
     let index_ = students.length;
     // Le agregamos contenido
     row.innerHTML = `
-      <td>${student.name}</td>
-       <td>${student.lastName}</td>
-       <td>${student.grade}</td>
-       <td>${student.date}</td>
-        <td> <button class="delete-btn" ${student.actions}">Eliminar</td>
-        <td> <button class="mod" ${student.actions}">Modificar</td>
-        `;
+    <td>${student.name}</td>
+    <td>${student.lastName}</td>
+    <td>${student.grade}</td>
+    <td>${student.date}</td>
+    <td> <button class="delete-btn" ${student.actions}">Eliminar</td>
+    <td> <button class="mod" ${student.actions}">Modificar</td>
+    `;
 
         row.querySelector(".delete-btn").addEventListener("click", function(){
             deleteEstudiante(student, row);
@@ -95,7 +95,37 @@ function deleteEstudiante(elem, row){
     console.log(students)
     row.remove()
 
+}
 
+function modify_tr(index) {
+
+    // Obtener nuevos datos del formulario
+    const name = document.getElementById("name").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const grade = parseFloat(document.getElementById("grade").value);
+    const date = document.getElementById("date").value.trim();
+
+    // Validación básica
+    if (!name || !lastName || isNaN(grade) || grade < 1 || grade > 7 || !date) {
+        alert("Error al modificar datos");
+        return;
+    }
+
+    // Actualizar el objeto en el array
+    students[index] = { name, lastName, grade, date };
+
+    // Limpiar y volver a generar toda la tabla
+    tableBody.innerHTML = "";
+    students.forEach(addStudentToTable);
+
+    // Volver a mostrar botón "Guardar Alumno"
+    document.getElementById("save_dinamic").innerHTML = `<button type="submit" id="save_">Guardar Alumno</button>`;
+
+    // Limpiar el formulario
+    document.getElementById("studentForm").reset();
+
+    // Recalcular promedio
+    avg_prom();
 }
 
 function mod_est(student, row){
@@ -106,5 +136,6 @@ function mod_est(student, row){
     document.getElementById("grade").value = students[cant_]["grade"]
     document.getElementById("date").value = students[cant_]["date"]
 
+    document.getElementById("save_dinamic").innerHTML = `<input type="button" class="bt_sv" onclick="modify_tr(${cant_})" value="Modificar Alumno">`;
 
 }
