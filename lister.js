@@ -53,12 +53,12 @@ function addStudentToTable(student){
     <td>${student.lastName}</td>
     <td>${student.grade}</td>
     <td>${student.date}</td>
-    <td> <button class="delete-btn" ${student.actions}">Eliminar</td>
-    <td> <button class="mod" ${student.actions}">Modificar</td>
+    <td><div id="buttons_mod"><button class="delete-btn" ${student.actions}">Eliminar<button class="mod" ${student.actions}">Modificar</div></td>
     `;
 
         row.querySelector(".delete-btn").addEventListener("click", function(){
             deleteEstudiante(student, row);
+            avg_prom();
         });
         row.querySelector(".mod").addEventListener("click", function(){
             mod_est(student, row);
@@ -73,27 +73,44 @@ function addStudentToTable(student){
 function avg_prom(){
     let CANT_ST = students.length;
 
-    if (!students){
-        modify_.innerHTML = `Promedio de Calificaciones: ${total/CANT_ST}`;
+    if (!students || CANT_ST == 0){
+        modify_.innerHTML = `Promedio de Calificaciones: No disponible`;
         return
     }
 
     // Se declara la suma de todos los promedios en 0
     let total = 0;
-    
+
+    // Contador de aprovados y reprovados
+    let aprov = 0;
+    let repro = 0;
+
+
     // Por cada estudiante se va sumando hasta dividirlo por la cantidad
     for (elem of students){
+
+        if (elem.grade >= 4.0){
+            aprov += 1
+        }else {
+            repro += 1
+        }
+
         total = total + elem.grade;
     }
-    modify_.innerHTML = `Promedio de Calificaciones: ${total/CANT_ST}`;
+    modify_.innerHTML = `Promedio de Calificaciones: ${total/CANT_ST}<br>
+    Cantidad de Estudiantes: ${CANT_ST}<br>
+    Estudiantes Aprovados: ${aprov}<br>
+    Estudiantes Reprobados: ${repro}
+    `;
 }
 
 function deleteEstudiante(elem, row){
+    let index_ = students.indexOf(elem)
 
-    students.slice(elem, 1)
-    avg_prom()
-    console.log(students)
-    row.remove()
+    students.splice(index_, 1);
+    avg_prom();
+    console.log(students);
+    row.remove();
 
 }
 
